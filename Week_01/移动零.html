@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // 题目：移动零，放置最后，其他元素顺序不变
+    let origin = [0, 1, 0, 4, 7, 0, 1];
+    const result = move(origin)
+    console.log(result, 57);
+
+    // 思路: 双指针，移动零，遇零删除，并在数组最后添加0
+    // 缺点：复杂度高：删除操作-数组时间复杂度是O(n), 加外层循环-复杂度成了n平方
+    function move(array) {
+        let index = 0, len = array.length;
+        for (let num = 0; num < len; num++) {
+            const element = array[index];
+
+            if(element === 0) {
+                array.splice(index, 1)
+                array.push(0)
+            }else {
+                index += 1
+            }
+        }
+
+        return array;
+    }
+
+    // 思路：双指针法，记录非0元素下标j，当前遍历元素i，因为0都是一样的，交换两值就可以。
+    // best *****
+    function moveZeroes(nums) {
+        let j = 0;
+        for (let i = 0; i < nums.length; i++) {
+            if(nums[i] != 0) {
+                if(i != j) {
+                    nums[j] = nums[i]
+                    nums[i] = 0
+                }
+                j++
+            }            
+        }
+    }
+</script>
+</body>
+</html>
